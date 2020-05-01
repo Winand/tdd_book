@@ -10,6 +10,9 @@ class NewVisitorTest(unittest.TestCase):
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
         self.browser.get('http://localhost:8000')
+        # (Check the server is running)
+        self.assertFalse('ERR_CONNECTION_REFUSED' in self.browser.page_source,
+                         msg="Connection refused")
 
         # She notices the page title and header mention to-do lists
         self.assertIn('To-Do', self.browser.title)
