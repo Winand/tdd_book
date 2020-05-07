@@ -1,3 +1,5 @@
+import sys
+from contextlib import contextmanager
 import time
 from django.test import LiveServerTestCase
 from selenium import webdriver
@@ -12,7 +14,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser = webdriver.Chrome()
 
     def tearDown(self):
-        self.browser.quit()
+        with suppress_stderr():
+            self.browser.quit()
 
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
@@ -85,7 +88,8 @@ class NewVisitorTest(LiveServerTestCase):
 
         ## We use a new browser session to make sure that no information
         ## of Edith's is coming through from cookies etc
-        self.browser.quit()
+        with suppress_stderr():
+            self.browser.quit()
         self.browser = webdriver.Chrome()
 
         # Francis visits the home page. There is no sing of Edith's
@@ -113,3 +117,14 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('Buy milk', page_text)
 
         # Satisfied, they both go back to sleep
+
+@contextmanager
+def suppress_stderr():
+    "Temporarly suppress writes to stderr"
+    class Null:
+        write = lambda *args: None
+    err, sys.stderr = sys.stderr, Null
+    try:
+        yield
+    finally:
+        sys.stderr = err
