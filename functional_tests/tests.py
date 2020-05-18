@@ -7,11 +7,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 
 MAX_WAIT = 3
+opt = webdriver.ChromeOptions()
+opt.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 
 class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Chrome(options=opt)
 
     def tearDown(self):
         with suppress_stderr():
@@ -90,7 +92,7 @@ class NewVisitorTest(LiveServerTestCase):
         ## of Edith's is coming through from cookies etc
         with suppress_stderr():
             self.browser.quit()
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Chrome(options=opt)
 
         # Francis visits the home page. There is no sign of Edith's
         # list
