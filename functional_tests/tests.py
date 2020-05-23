@@ -1,7 +1,7 @@
 import sys
 from contextlib import contextmanager
 import time
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
@@ -11,7 +11,7 @@ opt = webdriver.ChromeOptions()
 opt.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Chrome(options=opt)
 
