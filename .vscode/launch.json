@@ -27,7 +27,12 @@
                 // "--noreload"
             ],
             "django": true,  // enable debugging of page templates
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "serverReadyAction": {
+                "pattern": "Starting development server at (.+)/",
+                "uriFormat": "%s",
+                "action": "openExternally",
+            }
         },
         {
             "name": "manage.py makemigrations",
