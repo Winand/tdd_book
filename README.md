@@ -4,7 +4,7 @@ To-Do list project from ["Test Driven Development With Python"](https://www.obey
 Environment:
 * Anaconda
 * VS Code
-* Python 3.8.2
+* Python 3.8
 * Django 3.0.3
 * Chrome 83
 * Selenium 3.141.0
