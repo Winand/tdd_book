@@ -7,17 +7,14 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 
 MAX_WAIT = 3
-opt = webdriver.ChromeOptions()
-opt.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 
 class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
-        self.browser = webdriver.Chrome(options=opt)
+        self.browser = Chrome()
 
     def tearDown(self):
-        with suppress_stderr():
-            self.browser.quit()
+        self.browser.quit()
 
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
@@ -36,9 +33,6 @@ class NewVisitorTest(StaticLiveServerTestCase):
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
         self.browser.get(self.live_server_url)
-        # (Check the server is running)
-        self.assertFalse('ERR_CONNECTION_REFUSED' in self.browser.page_source,
-                         msg="Connection refused")
 
         # She notices the page title and header mention to-do lists
         self.assertIn('To-Do', self.browser.title)
@@ -90,9 +84,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         ## We use a new browser session to make sure that no information
         ## of Edith's is coming through from cookies etc
-        with suppress_stderr():
-            self.browser.quit()
-        self.browser = webdriver.Chrome(options=opt)
+        self.browser.quit()
+        self.browser = Chrome()
 
         # Francis visits the home page. There is no sign of Edith's
         # list
@@ -155,3 +148,32 @@ def suppress_stderr():
         yield
     finally:
         sys.stderr = err
+
+class Chrome(webdriver.Chrome):
+    def __init__(self, *args, **kwargs):
+        if "options" not in kwargs:
+            kwargs["options"] = webdriver.ChromeOptions()
+        # Suppress DevTools message on start
+        kwargs["options"].add_experimental_option('excludeSwitches',
+                                                  ['enable-logging'])
+        super().__init__(*args, **kwargs)
+
+    def get(self, url):
+        super().get(url)
+        self.raise_browser_errors()
+
+    def raise_browser_errors(self):
+        """
+        Check webpage for browser errors.
+        See Firefox driver errors in chapter 9.2
+        """
+        err_status = ('ERR_CONNECTION_REFUSED', 'ERR_NAME_NOT_RESOLVED')
+        for err in err_status:
+            if err in self.page_source:
+                msg = "Reached error page: %s (%s)" % (err, self.current_url)
+                raise WebDriverException(msg)
+
+    def quit(self):
+        "Suppress connection reset errors on quit"
+        with suppress_stderr():
+            super().quit()
