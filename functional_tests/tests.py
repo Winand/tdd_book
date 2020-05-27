@@ -156,6 +156,8 @@ class Chrome(webdriver.Chrome):
         # Suppress DevTools message on start
         kwargs["options"].add_experimental_option('excludeSwitches',
                                                   ['enable-logging'])
+        if not (args or 'executable_path' in kwargs):
+            args = ("chromedriver.exe",)  # WSL needs extension
         super().__init__(*args, **kwargs)
 
     def get(self, url):
