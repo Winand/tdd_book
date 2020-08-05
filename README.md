@@ -11,7 +11,7 @@ To-Do list project from ["Test Driven Development With Python"](https://www.obey
 * ChromeDriver 2.38
 * Bootstrap 4.5
 
-### Develop using Windows Subsystem for Linux (WSL 1) ###
+### Develop using Windows Subsystem for Linux (WSL 1*) ###
 1) Enable WSL component in Windows 10
 2) Install Alpine WSL from Windows Store
 3) Run Alpine WSL to initialize it and create new user
@@ -25,3 +25,6 @@ To-Do list project from ["Test Driven Development With Python"](https://www.obey
         "PATH": "/mnt/c/Anaconda3/envs/tdd/Library/bin:${env:PATH}"
     }
 ```
+\* WSL 2 cannot connect to Selenium WebDriver started on `localhost` in Windows
+\[[1](https://docs.microsoft.com/ru-ru/windows/wsl/compare-versions#accessing-windows-networking-apps-from-linux-host-ip),
+[2](https://github.com/microsoft/WSL/issues/4932#issuecomment-591733193)\]
