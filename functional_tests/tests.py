@@ -169,7 +169,10 @@ class Chrome(webdriver.Chrome):
         Check webpage for browser errors.
         See Firefox driver errors in chapter 9.2
         """
-        err_status = ('ERR_CONNECTION_REFUSED', 'ERR_NAME_NOT_RESOLVED')
+        err_status = (
+            'ERR_CONNECTION_REFUSED', 'ERR_NAME_NOT_RESOLVED',
+            'DNS_PROBE_FINISHED_NXDOMAIN'
+        )
         for err in err_status:
             if err in self.page_source:
                 msg = "Reached error page: %s (%s)" % (err, self.current_url)
