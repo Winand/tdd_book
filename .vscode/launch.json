@@ -18,6 +18,21 @@
             "justMyCode": false,
         },
         {
+            "name": "manage.py test (staging)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "test",
+                "${input:test_labels}",
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "STAGING_SERVER": "${config:STAGING_SERVER}",
+            },
+        },
+        {
             "name": "manage.py runserver",
             "type": "python",
             "request": "launch",
