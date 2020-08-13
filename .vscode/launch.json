@@ -24,10 +24,15 @@
             "program": "${workspaceFolder}/manage.py",
             "args": [
                 "runserver",
-                // "--noreload"
+                // https://github.com/microsoft/vscode-python/issues/11137
+                // https://github.com/microsoft/debugpy/issues/125
+                // https://github.com/microsoft/debugpy/issues/126
+                "--noreload" // reload updated files
             ],
             "django": true,  // enable debugging of page templates
             "console": "integratedTerminal",
+            // Opens URL twice when debugging, because of reloader:
+            // https://stackoverflow.com/a/28490054/1119602
             "serverReadyAction": {
                 "pattern": "Starting development server at (.+)/",
                 "uriFormat": "%s",
@@ -39,7 +44,9 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
-            "args": ["makemigrations",],
+            "args": [
+                "makemigrations",
+            ],
             "console": "integratedTerminal"
         },
         {
