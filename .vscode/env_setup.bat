@@ -1,3 +1,3 @@
 wsl -d Alpine su -c "sh env_alpine.sh"
 REM Settings for non-root user:
-wsl git config --global core.autocrlf true
+wsl -d Alpine git config --global core.autocrlf true
