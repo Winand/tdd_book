@@ -165,15 +165,28 @@ def suppress_stderr():
     finally:
         sys.stderr = err
 
-class Chrome(webdriver.Chrome):
+
+import shutil
+chrome_based_drivers = {
+    "chromedriver": webdriver.Chrome, "chromedriver.exe": webdriver.Chrome,
+    "msedgedriver": webdriver.Edge, "msedgedriver.exe": webdriver.Edge,
+}
+driver_name = next((i for i in chrome_based_drivers if shutil.which(i)), "")
+if not driver_name:
+    raise EnvironmentError("Chrome or Edge driver not found")
+driver_type = chrome_based_drivers[driver_name]
+
+
+class Chrome(driver_type):
     def __init__(self, *args, **kwargs):
-        if "options" not in kwargs:
-            kwargs["options"] = webdriver.ChromeOptions()
-        # Suppress DevTools message on start
-        kwargs["options"].add_experimental_option('excludeSwitches',
-                                                  ['enable-logging'])
+        if driver_type == webdriver.Chrome:
+            if "options" not in kwargs:
+                kwargs["options"] = webdriver.ChromeOptions()
+            # Suppress DevTools message on start
+            kwargs["options"].add_experimental_option('excludeSwitches',
+                                                    ['enable-logging'])
         if not (args or 'executable_path' in kwargs):
-            args = ("chromedriver.exe",)  # WSL needs extension
+            args = (driver_name,)  # if .exe WSL needs extension
         super().__init__(*args, **kwargs)
 
     def get(self, url):
