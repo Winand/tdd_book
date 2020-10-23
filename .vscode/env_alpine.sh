@@ -10,4 +10,4 @@ pip install selenium
 apk add gcc python3-dev musl-dev libffi-dev make openssl-dev #
 pip install fabric3
 pip install pylint
-apk add git
+apk add git #
