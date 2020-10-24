@@ -7,10 +7,25 @@
             "label": "Reset database",
             "type": "shell",
             "command": [
-                "del db.sqlite3 &&",
-                "${config:python.pythonPath}\\..\\..\\..\\Scripts\\activate ${config:python.pythonPath}\\.. &&",
-                "python manage.py migrate --noinput"
-            ],
+                "rm db.sqlite3 &&",
+                "python manage.py migrate"
+            ]
+        },
+        {
+            "label": "Deploy staging",
+            "type": "shell",
+            "command": [
+                "cd deploy_tools &&",
+                "fab deploy:host=${config:STAGING_SERVER}"
+            ]
+        },
+        {
+            "label": "Deploy",
+            "type": "shell",
+            "command": [
+                "cd deploy_tools &&",
+                "fab deploy:host=${config:LIVE_SERVER}"
+            ]
         }
     ]
 }
