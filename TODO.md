@@ -1,0 +1,2 @@
+* Remove hardcoded URLs from views.py
+* Remove hardcoded URL from forms in list.html and home.html
