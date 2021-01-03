@@ -85,6 +85,7 @@
                     "label": "All tests",
                     "value": "."
                 },
+                "accounts",
                 "lists",
                 "functional_tests",
             ],
