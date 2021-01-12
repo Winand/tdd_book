@@ -16,7 +16,7 @@
                     {% if user.email %}
                         <ul class="navbar-nav">
                             <li class="navbar-text">Logged in as {{ user.email }}</li>
-                            <li><a class="nav-link active" href="#">Log out</a></li>
+                            <li><a class="nav-link active" href="{% url 'logout' %}">Log out</a></li>
                         </ul>
                     {% else %}
                         <form class="form-inline" method="POST" action="{% url 'send_login_email' %}">
