@@ -32,6 +32,7 @@
             "justMyCode": false,
             "env": {
                 "STAGING_SERVER": "${config:STAGING_SERVER}",
+                "STAGING_USERNAME": "${config:STAGING_USERNAME}",
             },
         },
         {
