@@ -85,6 +85,7 @@ class ItemValidationTest(FunctionalTest):
         ))
 
     def test_error_messages_are_cleared_on_click(self):
+        "Additional test. See note: https://www.obeythetestinggoat.com/book/chapter_javascript.html#_javascript_testing_in_the_tdd_cycle"
         # Edith starts a list and causes a validation error:
         self.browser.get(self.live_server_url)
         self.get_item_input_box().send_keys('Banter too thick')
