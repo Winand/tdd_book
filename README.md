@@ -25,6 +25,8 @@ To-Do list project from ["Test Driven Development With Python"](https://www.obey
         "PATH": "/mnt/c/Anaconda3/envs/tdd/Library/bin:${env:PATH}"
     }
 ```
+9) Add `"FAIL_FAST": "",  // --failfast` to `.vscode/settings.json`
+
 \* WSL 2 cannot connect to Selenium WebDriver started on `localhost` in Windows
 \[[1](https://docs.microsoft.com/ru-ru/windows/wsl/compare-versions#accessing-windows-networking-apps-from-linux-host-ip),
 [2](https://github.com/microsoft/WSL/issues/4932#issuecomment-591733193)\]
