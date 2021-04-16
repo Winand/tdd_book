@@ -19,7 +19,7 @@ To-Do list project from ["Test Driven Development With Python"](https://www.obey
 5) [VS Code] Install "Remote - WSL" extension
 6) [VS Code] Run command "Remote-WSL: Reopen Folder in WSL"
 7) [VS Code] Install "Python" extension
-8) [VS Code] Add local WebDriver path to workspace settings (`.vscode/settings.json`) or remote settings ("Preferences: Open Remote settings" command):
+8) [VS Code] Add local WebDriver path to workspace settings (`.vscode/settings.json`) or remote settings ("Preferences: Open Remote settings" command) then restart terminal in VS Code:
 ```
     "terminal.integrated.env.linux": {
         "PATH": "/mnt/c/Anaconda3/envs/tdd/Library/bin:${env:PATH}"
