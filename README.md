@@ -8,7 +8,7 @@ To-Do list project from ["Test Driven Development With Python"](https://www.obey
 * Django 3.0.3
 * Chrome 83
 * Selenium 3.141.0
-* ChromeDriver 2.38
+* [ChromeDriver 2.38](https://chromedriver.storage.googleapis.com/index.html?path=2.38/)
 * Bootstrap 4.5
 
 ### Develop using Windows Subsystem for Linux (WSL 1*) ###
